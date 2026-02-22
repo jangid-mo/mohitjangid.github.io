@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mohit Jangid | Robotics Engineer</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --blue:#1d4ed8;--blue-dark:#1e3a8a;--blue-light:#eff6ff;
+    --black:#0f172a;--text:#1e293b;--muted:#475569;--border:#dbeafe;
+    --bg:#ffffff;--section-bg:#f8faff;
+  }
+  body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--text);background:var(--bg);line-height:1.6;overflow-x:hidden;}
+
+  /* NAV */
+  nav{position:sticky;top:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(8px);border-bottom:2px solid var(--blue-light);z-index:100;padding:0 2rem;}
+  .nav-inner{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;height:62px;}
+  .nav-logo{font-weight:900;font-size:1.1rem;color:var(--blue-dark);text-decoration:none;}
+  .nav-logo span{color:var(--black);}
+  .nav-links{display:flex;gap:1.8rem;list-style:none;}
+  .nav-links a{text-decoration:none;color:var(--muted);font-size:.86rem;font-weight:600;transition:color .2s;}
+  .nav-links a:hover{color:var(--blue);}
+
+  /* HERO */
+  .hero{position:relative;max-width:1100px;margin:auto;padding:5rem 2rem 4rem;overflow:hidden;}
+  .hero-tag{display:inline-block;background:var(--blue-light);color:var(--blue);font-size:.75rem;font-weight:700;padding:.3rem .9rem;border-radius:20px;margin-bottom:1.2rem;letter-spacing:.8px;text-transform:uppercase;border:1px solid #bfdbfe;}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:900;color:var(--black);line-height:1.1;margin-bottom:.5rem;}
+  .hero h1 span{color:var(--blue);}
+  .hero-role{font-size:1.2rem;font-weight:700;color:var(--blue);margin-top:.3rem;margin-bottom:2rem;}
+  .hero-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2.5rem;}
+  .chip{background:#fff;border:1.5px solid var(--blue);border-radius:20px;padding:.3rem .9rem;font-size:.78rem;color:var(--blue);font-weight:600;}
+  .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+  .btn{padding:.7rem 1.6rem;border-radius:8px;font-size:.9rem;font-weight:700;text-decoration:none;transition:all .2s;display:inline-block;}
+  .btn-primary{background:var(--blue);color:#fff;box-shadow:0 4px 14px rgba(29,78,216,.3);}
+  .btn-primary:hover{background:var(--blue-dark);transform:translateY(-1px);}
+  .btn-outline{background:transparent;color:var(--blue);border:2px solid var(--blue);}
+  .btn-outline:hover{background:var(--blue-light);}
+  .doodle-hero{position:absolute;right:-20px;top:40px;opacity:.09;pointer-events:none;}
+  .doodle-float{position:absolute;opacity:.08;pointer-events:none;}
+
+  /* SECTIONS */
+  section{padding:4rem 2rem;position:relative;}
+  section.alt{background:var(--section-bg);}
+  .section-inner{max-width:1100px;margin:auto;}
+  .section-label{font-size:.72rem;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.3rem;}
+  .section-title{font-size:1.8rem;font-weight:900;color:var(--black);margin-bottom:.5rem;}
+  .section-sub{color:var(--muted);margin-bottom:2.5rem;max-width:560px;font-size:.93rem;}
+  .divider{width:40px;height:4px;background:var(--blue);border-radius:2px;margin-bottom:1.8rem;}
+
+  /* ABOUT */
+  .about-box{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:2rem 2.5rem;max-width:800px;}
+  .about-box p{font-size:1.02rem;color:var(--text);line-height:2;}
+  .about-box p span{color:var(--blue);font-weight:700;}
+
+  /* CARDS */
+  .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:1.5rem;}
+  .card{background:#fff;border:1.5px solid var(--border);border-radius:14px;overflow:hidden;transition:box-shadow .25s,transform .25s,border-color .25s;display:flex;flex-direction:column;}
+  .card:hover{box-shadow:0 8px 32px rgba(29,78,216,.12);transform:translateY(-3px);border-color:#93c5fd;}
+
+  /* SLIDESHOW */
+  .slideshow{position:relative;width:100%;height:210px;overflow:hidden;background:var(--blue-light);}
+  .slide{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transition:opacity .6s ease;pointer-events:none;}
+  .slide.active{opacity:1;pointer-events:auto;}
+  .slide img{width:100%;height:100%;object-fit:cover;display:block;}
+  .slide-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.88);border:none;border-radius:50%;width:30px;height:30px;font-size:1rem;cursor:pointer;z-index:10;color:var(--blue);font-weight:900;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+  .slide-btn:hover{background:#fff;}
+  .slide-btn.prev{left:8px;}
+  .slide-btn.next{right:8px;}
+  .slide-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:10;}
+  .dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.6);cursor:pointer;transition:background .2s;}
+  .dot.active{background:var(--blue);}
+
+  .card-body{padding:1.2rem 1.4rem;flex:1;display:flex;flex-direction:column;}
+  .card-category{font-size:.7rem;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:.4rem;}
+  .card h3{font-size:1rem;font-weight:800;color:var(--black);margin-bottom:.5rem;}
+  .card p{font-size:.85rem;color:var(--muted);line-height:1.65;flex:1;}
+  .card-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.9rem;}
+  .tag{font-size:.7rem;padding:.2rem .6rem;border-radius:10px;font-weight:700;}
+  .tag-blue{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;}
+  .tag-black{background:#f1f5f9;color:#0f172a;border:1px solid #cbd5e1;}
+  .tag-mid{background:#dbeafe;color:#1e3a8a;border:1px solid #93c5fd;}
+  .card-footer{padding:.8rem 1.4rem 1.2rem;display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;border-top:1px solid var(--border);margin-top:.8rem;}
+  .card-badge{font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:20px;}
+  .badge-patent{background:#fefce8;color:#854d0e;border:1px solid #fef08a;}
+  .badge-funded{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;}
+  .badge-intl{background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe;}
+  .badge-course{background:#dbeafe;color:#1e3a8a;border:1px solid #93c5fd;}
+  .card-links{display:flex;gap:.5rem;margin-left:auto;}
+  .card-link{font-size:.73rem;font-weight:700;color:var(--blue);text-decoration:none;padding:.22rem .65rem;border:1.5px solid var(--blue);border-radius:6px;transition:all .2s;}
+  .card-link:hover{background:var(--blue);color:#fff;}
+
+  /* COMPETITION */
+  .comp-card{background:#fff;border:1.5px solid var(--border);border-radius:14px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;min-height:260px;}
+  @media(max-width:640px){.comp-card{grid-template-columns:1fr;}}
+  .comp-slideshow{position:relative;height:100%;min-height:260px;overflow:hidden;background:var(--blue-light);}
+  .comp-slideshow .slide img{object-fit:cover;}
+  .comp-body{padding:1.8rem;}
+  .comp-body h3{font-size:1.1rem;font-weight:800;color:var(--black);margin-bottom:.6rem;}
+  .comp-body p{font-size:.88rem;color:var(--muted);line-height:1.7;margin-bottom:1rem;}
+
+  /* EXPERIENCE */
+  .exp-list{display:flex;flex-direction:column;gap:1.2rem;}
+  .exp-card{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:1.5rem;transition:box-shadow .2s;}
+  .exp-card:hover{box-shadow:0 4px 20px rgba(29,78,216,.1);}
+  .exp-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.7rem;}
+  .exp-title{font-weight:800;font-size:1rem;color:var(--black);}
+  .exp-company{font-size:.88rem;color:var(--blue);font-weight:700;}
+  .exp-date{font-size:.78rem;color:var(--muted);background:var(--blue-light);padding:.2rem .6rem;border-radius:20px;font-weight:600;border:1px solid #bfdbfe;}
+  .exp-desc{font-size:.85rem;color:var(--muted);line-height:1.7;}
+  .exp-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.8rem;}
+
+  /* EDUCATION */
+  .edu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem;}
+  .edu-card{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:1.4rem;}
+  .edu-degree{font-weight:800;font-size:.98rem;color:var(--black);margin-bottom:.25rem;}
+  .edu-school{font-size:.88rem;color:var(--blue);font-weight:700;margin-bottom:.25rem;}
+  .edu-date{font-size:.78rem;color:var(--muted);}
+
+  /* SKILLS */
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;}
+  .skill-group{background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:1.2rem;}
+  .skill-group h4{font-size:.75rem;font-weight:800;color:var(--blue);margin-bottom:.7rem;text-transform:uppercase;letter-spacing:.8px;}
+  .skill-group ul{list-style:none;display:flex;flex-direction:column;gap:.35rem;}
+  .skill-group li{font-size:.82rem;color:var(--muted);}
+  .skill-group li::before{content:"▸ ";color:var(--blue);font-weight:700;}
+
+  /* CONTACT */
+  .contact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1rem;}
+  .contact-item{background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:1.2rem;text-align:center;transition:border-color .2s,box-shadow .2s;}
+  .contact-item:hover{border-color:#93c5fd;box-shadow:0 4px 14px rgba(29,78,216,.08);}
+  .contact-label{font-size:.68rem;color:var(--blue);margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.8px;font-weight:800;}
+  .contact-item a{text-decoration:none;color:var(--black);font-weight:700;font-size:.88rem;}
+  .contact-item a:hover{color:var(--blue);}
+  .contact-item span{color:var(--black);font-size:.88rem;font-weight:600;}
+
+  footer{text-align:center;padding:2rem;font-size:.78rem;color:var(--muted);border-top:2px solid var(--blue-light);}
+  footer span{color:var(--blue);font-weight:700;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#"><span>Mohit</span> Jangid</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#competition">Competition</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <svg class="doodle-hero" width="480" height="480" viewBox="0 0 480 480" fill="none">
+    <rect x="200" y="380" width="80" height="20" rx="4" stroke="#1d4ed8" stroke-width="3"/>
+    <rect x="220" y="300" width="40" height="80" rx="4" stroke="#1d4ed8" stroke-width="3"/>
+    <circle cx="240" cy="300" r="12" stroke="#1d4ed8" stroke-width="3"/>
+    <line x1="240" y1="288" x2="180" y2="220" stroke="#1d4ed8" stroke-width="3"/>
+    <circle cx="180" cy="220" r="12" stroke="#1d4ed8" stroke-width="3"/>
+    <line x1="180" y1="208" x2="240" y2="140" stroke="#1d4ed8" stroke-width="3"/>
+    <circle cx="240" cy="140" r="12" stroke="#1d4ed8" stroke-width="3"/>
+    <line x1="240" y1="128" x2="300" y2="80" stroke="#1d4ed8" stroke-width="3"/>
+    <line x1="300" y1="80" x2="320" y2="60" stroke="#1d4ed8" stroke-width="3"/>
+    <line x1="300" y1="80" x2="320" y2="100" stroke="#1d4ed8" stroke-width="3"/>
+    <circle cx="380" cy="180" r="30" stroke="#1d4ed8" stroke-width="2.5"/>
+    <circle cx="380" cy="180" r="18" stroke="#1d4ed8" stroke-width="2.5"/>
+    <line x1="380" y1="148" x2="380" y2="140" stroke="#1d4ed8" stroke-width="2.5"/>
+    <line x1="380" y1="212" x2="380" y2="220" stroke="#1d4ed8" stroke-width="2.5"/>
+    <line x1="348" y1="180" x2="340" y2="180" stroke="#1d4ed8" stroke-width="2.5"/>
+    <line x1="412" y1="180" x2="420" y2="180" stroke="#1d4ed8" stroke-width="2.5"/>
+    <rect x="60" y="60" width="50" height="40" rx="6" stroke="#1d4ed8" stroke-width="2.5"/>
+    <circle cx="75" cy="75" r="6" stroke="#1d4ed8" stroke-width="2"/>
+    <circle cx="95" cy="75" r="6" stroke="#1d4ed8" stroke-width="2"/>
+    <rect x="70" y="100" width="30" height="30" rx="3" stroke="#1d4ed8" stroke-width="2.5"/>
+    <line x1="60" y1="110" x2="45" y2="125" stroke="#1d4ed8" stroke-width="2.5"/>
+    <line x1="110" y1="110" x2="125" y2="125" stroke="#1d4ed8" stroke-width="2.5"/>
+    <line x1="75" y1="130" x2="68" y2="155" stroke="#1d4ed8" stroke-width="2.5"/>
+    <line x1="95" y1="130" x2="102" y2="155" stroke="#1d4ed8" stroke-width="2.5"/>
+    <polyline points="380,260 380,280 420,280 420,320 400,320" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="4,4"/>
+    <circle cx="400" cy="320" r="4" fill="#1d4ed8"/>
+    <path d="M 340 80 Q 360 60 340 40" stroke="#1d4ed8" stroke-width="2" fill="none"/>
+    <path d="M 340 80 Q 370 50 340 20" stroke="#1d4ed8" stroke-width="2" fill="none"/>
+  </svg>
+  <div class="hero-tag">MS Robotics Engineering · Northeastern University</div>
+  <h1>Mohit<br/><span>Jangid</span></h1>
+  <p class="hero-role">Robotics & Mechatronics Engineer</p>
+  <div class="hero-chips">
+    <span class="chip">ROS2</span>
+    <span class="chip">SolidWorks · CSWA</span>
+    <span class="chip">Sensor Fusion · EKF</span>
+    <span class="chip">MATLAB · Python · C++</span>
+    <span class="chip">Embedded Systems</span>
+    <span class="chip">Mechanism Design</span>
+  </div>
+  <div class="hero-btns">
+    <a class="btn btn-primary" href="#projects">View Projects</a>
+    <a class="btn btn-outline" href="#contact">Get In Touch</a>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">Who I Am</div>
+    <div class="section-title">About Me</div>
+    <div class="divider"></div>
+    <div class="about-box">
+      <p>I'm a <span>robotics engineer from India</span>, currently pursuing my MS at <span>Northeastern University in Boston</span>. My journey started at <span>ABU Robocon 2022</span>, where competing internationally sparked a deep passion for building real, functional machines. Since then I've designed industrial systems professionally, worked on research projects, and continue to grow across the <span>full stack of robotics</span> — from mechanical design to software to controls. I believe the best engineers don't just design on paper — they <span>build, test, and iterate</span>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="alt" id="projects">
+  <svg class="doodle-float" style="right:2rem;top:2rem;" width="80" height="80" viewBox="0 0 80 80">
+    <circle cx="40" cy="40" r="28" stroke="#1d4ed8" stroke-width="2.5"/>
+    <circle cx="40" cy="40" r="16" stroke="#1d4ed8" stroke-width="2.5"/>
+    <line x1="40" y1="10" x2="40" y2="4" stroke="#1d4ed8" stroke-width="2.5"/>
+    <line x1="40" y1="70" x2="40" y2="76" stroke="#1d4ed8" stroke-width="2.5"/>
+    <line x1="10" y1="40" x2="4" y2="40" stroke="#1d4ed8" stroke-width="2.5"/>
+    <line x1="70" y1="40" x2="76" y2="40" stroke="#1d4ed8" stroke-width="2.5"/>
+  </svg>
+  <div class="section-inner">
+    <div class="section-label">Work</div>
+    <div class="section-title">Projects</div>
+    <p class="section-sub">Robotics, mechatronics, and sensing projects from research and coursework.</p>
+    <div class="divider"></div>
+    <div class="projects-grid">
+
+      <!-- SENSENAV -->
+      <div class="card">
+        <div class="slideshow" id="ss-sensenav">
+          <div class="slide active"><img src="sensenav-rig.jpeg" alt="Sensor rig"/></div>
+          <div class="slide"><img src="sensenav-indoor.png" alt="Indoor EKF"/></div>
+          <div class="slide"><img src="sensenav-imu.png" alt="IMU data"/></div>
+          <div class="slide"><img src="sensenav-trajectory.png" alt="Trajectory"/></div>
+          <div class="slide"><img src="sensenav-gps.png" alt="GPS timeline"/></div>
+          <div class="slide"><img src="sensenav-vo.png" alt="Visual odometry"/></div>
+          <button class="slide-btn prev" onclick="changeSlide('ss-sensenav',-1)">&#8249;</button>
+          <button class="slide-btn next" onclick="changeSlide('ss-sensenav',1)">&#8250;</button>
+          <div class="slide-dots" id="dots-ss-sensenav"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-category">Sensor Fusion · ROS2</div>
+          <h3>SenseNav — Multi-Sensor Localization</h3>
+          <p>Integrated GPS, IMU (VectorNav VN-100), and camera in ROS2 Jazzy. Implemented Extended Kalman Filter with GPS–VO frame alignment via SVD. Reduced monocular VO drift from 45.8% → 3.1% using IMU-aided approach. Tested across indoor, outdoor, and transition scenarios (444s total data).</p>
+          <div class="card-tags">
+            <span class="tag tag-blue">ROS2 Jazzy</span>
+            <span class="tag tag-mid">EKF</span>
+            <span class="tag tag-black">GPS · IMU · Camera</span>
+            <span class="tag tag-blue">Python</span>
+            <span class="tag tag-mid">Visual Odometry</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-badge badge-course">Northeastern · EECE 5554</span>
+          <div class="card-links">
+            <a class="card-link" href="https://github.com/jangid-mo/EECE5554/tree/main/rsn_project_ws" target="_blank">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ME5250 P1 -->
+      <div class="card">
+        <div class="slideshow" id="ss-sixbar">
+          <div class="slide active"><img src="sixbar-cad1.png" alt="6-bar CAD"/></div>
+          <div class="slide"><img src="sixbar-cad2.png" alt="6-bar CAD 2"/></div>
+          <div class="slide"><img src="sixbar-plot1.png" alt="Position plots"/></div>
+          <div class="slide"><img src="sixbar-plot2.png" alt="Velocity plots"/></div>
+          <div class="slide"><img src="sixbar-plot3.png" alt="Workspace"/></div>
+          <button class="slide-btn prev" onclick="changeSlide('ss-sixbar',-1)">&#8249;</button>
+          <button class="slide-btn next" onclick="changeSlide('ss-sixbar',1)">&#8250;</button>
+          <div class="slide-dots" id="dots-ss-sixbar"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-category">Mechanism Design · Kinematics</div>
+          <h3>Six-Bar Linkage — Kinematic Analysis</h3>
+          <p>Designed two six-bar mechanisms in SolidWorks: a Stephenson III slider-crank (190mm stroke) and a Watt's platform deployment linkage (0–120° range). Complete MATLAB kinematic analysis — DOF, position, velocity, workspace, and singularity identification.</p>
+          <div class="card-tags">
+            <span class="tag tag-blue">SolidWorks</span>
+            <span class="tag tag-black">MATLAB</span>
+            <span class="tag tag-mid">Kinematics</span>
+            <span class="tag tag-blue">6-Bar Mechanism</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-badge badge-course">Northeastern · ME5250</span>
+          <div class="card-links">
+            <a class="card-link" href="https://youtu.be/oapEorcd294" target="_blank">▶ Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ME5250 P2 -->
+      <div class="card">
+        <div class="slideshow" id="ss-arm">
+          <div class="slide active"><img src="arm-cad.png" alt="3R arm CAD"/></div>
+          <div class="slide"><img src="arm-analysis.png" alt="Analysis plots"/></div>
+          <div class="slide"><img src="arm-velocity.png" alt="Velocity plots"/></div>
+          <button class="slide-btn prev" onclick="changeSlide('ss-arm',-1)">&#8249;</button>
+          <button class="slide-btn next" onclick="changeSlide('ss-arm',1)">&#8250;</button>
+          <div class="slide-dots" id="dots-ss-arm"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-category">Dynamics Simulation · MATLAB</div>
+          <h3>3R Planar Arm — Forward Dynamics</h3>
+          <p>Simulated a 3-link planar arm falling under gravity. Derived full dynamics — mass matrix from Jacobians, gravity torques via virtual work, Coriolis terms via Christoffel symbols. RK4 integration over 30,000 timesteps achieved 0.0002% energy conservation error.</p>
+          <div class="card-tags">
+            <span class="tag tag-blue">MATLAB</span>
+            <span class="tag tag-black">Forward Dynamics</span>
+            <span class="tag tag-mid">Christoffel Symbols</span>
+            <span class="tag tag-blue">RK4</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-badge badge-course">Northeastern · ME5250</span>
+          <div class="card-links">
+            <a class="card-link" href="https://youtu.be/YrEkKgTxhik" target="_blank">▶ Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- OSTRICH -->
+      <div class="card">
+        <div class="slideshow" id="ss-ostrich">
+          <div class="slide active"><img src="ostrich-render.png" alt="Ostrich render"/></div>
+          <div class="slide"><img src="ostrich-prototype.png" alt="Prototype"/></div>
+          <div class="slide"><img src="ostrich-joints.png" alt="Joint diagram"/></div>
+          <button class="slide-btn prev" onclick="changeSlide('ss-ostrich',-1)">&#8249;</button>
+          <button class="slide-btn next" onclick="changeSlide('ss-ostrich',1)">&#8250;</button>
+          <div class="slide-dots" id="dots-ss-ostrich"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-category">Legged Robotics · Mechanical Design</div>
+          <h3>The Ostrich — Bipedal Robot</h3>
+          <p>Designed a 10-DOF bipedal robot leg mechanism using the SLIP model framework. Full SolidWorks design, inverse kinematics solver (12 equations), 10 stepper motors with TB6600 drivers and Teensy 4.1. Physical prototype via hybrid CNC and 3D printing. Government funded through SSIP.</p>
+          <div class="card-tags">
+            <span class="tag tag-blue">SolidWorks</span>
+            <span class="tag tag-black">SLIP Model</span>
+            <span class="tag tag-mid">10-DOF</span>
+            <span class="tag tag-blue">CNC · 3D Printing</span>
+            <span class="tag tag-mid">Teensy 4.1</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-badge badge-patent">Patent Pending</span>
+          <span class="card-badge badge-funded">SSIP Funded</span>
+        </div>
+      </div>
+
+      <!-- FILAMENT -->
+      <div class="card">
+        <div class="slideshow" id="ss-filament">
+          <div class="slide active"><img src="filament-cad1.png" alt="Filament CAD 1" style="object-fit:contain;background:#eff6ff;"/></div>
+          <div class="slide"><img src="filament-cad2.png" alt="Filament CAD 2" style="object-fit:contain;background:#eff6ff;"/></div>
+          <button class="slide-btn prev" onclick="changeSlide('ss-filament',-1)">&#8249;</button>
+          <button class="slide-btn next" onclick="changeSlide('ss-filament',1)">&#8250;</button>
+          <div class="slide-dots" id="dots-ss-filament"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-category">Sustainable Design · CAD Concept</div>
+          <h3>Scrap-to-Filament Recycling System</h3>
+          <p>Designed a plastic waste recycling system linking a shredder to a screw conveyor extruder to produce 3D printing filament from scrap plastic. Responsible for mechanical design and full CAD modeling. Stage 2 scope included electronic circuit design for motor control and heating elements.</p>
+          <div class="card-tags">
+            <span class="tag tag-blue">SolidWorks</span>
+            <span class="tag tag-black">Sustainable Design</span>
+            <span class="tag tag-mid">Screw Conveyor</span>
+            <span class="tag tag-blue">Extrusion</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-badge badge-funded">Team Project</span>
+        </div>
+      </div>
+
+      <!-- IV BAG -->
+      <div class="card">
+        <div class="slideshow" id="ss-ivbag">
+          <div class="slide active"><img src="ivbag-prototype.png" alt="IV prototype"/></div>
+          <div class="slide"><img src="ivbag-diagram.png" alt="System diagram"/></div>
+          <div class="slide"><img src="ivbag-appcode.png" alt="App code"/></div>
+          <div class="slide"><img src="ivbag-appui.png" alt="App UI"/></div>
+          <button class="slide-btn prev" onclick="changeSlide('ss-ivbag',-1)">&#8249;</button>
+          <button class="slide-btn next" onclick="changeSlide('ss-ivbag',1)">&#8250;</button>
+          <div class="slide-dots" id="dots-ss-ivbag"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-category">IoT · Embedded Systems</div>
+          <h3>IV Bag Monitoring System</h3>
+          <p>Built an IoT-based IV bag monitoring system using ESP8266 and Arduino with load cell sensing. Tracks fluid levels in real time and alerts nurses via a custom MIT App Inventor mobile app, reducing manual monitoring workload by 20%. Includes automatic flow shutoff at critical thresholds.</p>
+          <div class="card-tags">
+            <span class="tag tag-blue">ESP8266 · Arduino</span>
+            <span class="tag tag-black">Load Cell</span>
+            <span class="tag tag-mid">IoT</span>
+            <span class="tag tag-blue">MIT App Inventor</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-badge badge-funded">Healthcare Application</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITION -->
+<section id="competition">
+  <div class="section-inner">
+    <div class="section-label">Competition</div>
+    <div class="section-title">ABU Robocon 2022</div>
+    <p class="section-sub">Where my robotics journey began — Asia's premier international robotics competition.</p>
+    <div class="divider"></div>
+    <div class="comp-card">
+      <div class="comp-slideshow" id="ss-robocon">
+        <div class="slide active"><img src="robocon-r2.png" alt="Robocon R2"/></div>
+        <div class="slide"><img src="robocon-r1.png" alt="Robocon R1"/></div>
+        <button class="slide-btn prev" onclick="changeSlide('ss-robocon',-1)">&#8249;</button>
+        <button class="slide-btn next" onclick="changeSlide('ss-robocon',1)">&#8250;</button>
+        <div class="slide-dots" id="dots-ss-robocon"></div>
+      </div>
+      <div class="comp-body">
+        <div class="card-category">Team Utkarsh · Lagori Theme · National Level</div>
+        <h3>Mechanism Design for Two Competition Robots</h3>
+        <p>Designed manipulation mechanisms for two robots at Asia's premier international robotics competition. R2 featured an adaptive gripper system for stone stacking, while R1 handled launching. Developed torque and force calculations, iterated designs rapidly, and contributed to national-level qualification.</p>
+        <div class="card-tags">
+          <span class="tag tag-blue">Mechanism Design</span>
+          <span class="tag tag-black">Gripper Design</span>
+          <span class="tag tag-mid">CAD Modeling</span>
+          <span class="tag tag-blue">Fabrication</span>
+          <span class="tag tag-mid">Force Analysis</span>
+        </div>
+        <div style="margin-top:1rem;">
+          <span class="card-badge badge-intl">International Competition</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="alt" id="experience">
+  <div class="section-inner">
+    <div class="section-label">Career</div>
+    <div class="section-title">Work Experience</div>
+    <div class="divider"></div>
+    <div class="exp-list">
+      <div class="exp-card">
+        <div class="exp-top">
+          <div>
+            <div class="exp-title">Design Engineer</div>
+            <div class="exp-company">Meekaj Vacuum Systems Pvt. Ltd.</div>
+          </div>
+          <div class="exp-date">Sep 2024 – Jul 2025 · India</div>
+        </div>
+        <p class="exp-desc">Designed and delivered 15+ custom industrial steam jet ejector vacuum systems. Managed full project cycle — CAD modeling, technical drawings, and manufacturing coordination. Implemented standardized templates and automated BOM generation, reducing design cycle time by 20% and achieving 95% customer satisfaction.</p>
+        <div class="exp-tags">
+          <span class="tag tag-blue">SolidWorks · AutoCAD</span>
+          <span class="tag tag-black">Industrial CAD</span>
+          <span class="tag tag-mid">GD&T</span>
+          <span class="tag tag-blue">CNC · Sheet Metal</span>
+        </div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-top">
+          <div>
+            <div class="exp-title">Engineering Intern</div>
+            <div class="exp-company">Anamika Filters</div>
+          </div>
+          <div class="exp-date">Jun 2024 – Aug 2024 · India</div>
+        </div>
+        <p class="exp-desc">Developed 3D CAD models and engineering drawings in SolidWorks for CNC machining, laser cutting, and sheet metal fabrication. Optimized product designs to achieve 10% material cost reduction and 12% manufacturability improvement. Conducted tolerance analysis on 8+ components, reducing manufacturing errors by 8%.</p>
+        <div class="exp-tags">
+          <span class="tag tag-blue">SolidWorks</span>
+          <span class="tag tag-black">Tolerance Analysis</span>
+          <span class="tag tag-mid">Laser Cutting</span>
+          <span class="tag tag-blue">Sheet Metal</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-label">Academic</div>
+    <div class="section-title">Education</div>
+    <div class="divider"></div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-degree">MS Robotics Engineering</div>
+        <div class="edu-school">Northeastern University, Boston</div>
+        <div class="edu-date">Expected December 2027</div>
+        <div class="exp-tags" style="margin-top:.8rem;">
+          <span class="tag tag-blue">Sensor Fusion</span>
+          <span class="tag tag-black">Mobile Robotics</span>
+          <span class="tag tag-mid">Control Systems</span>
+          <span class="tag tag-blue">Robot Mechanics</span>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">BTech Mechatronics Engineering</div>
+        <div class="edu-school">U.V. Patel College of Engineering, Ganpat University</div>
+        <div class="edu-date">May 2024</div>
+        <div class="exp-tags" style="margin-top:.8rem;">
+          <span class="tag tag-blue">Mechatronics</span>
+          <span class="tag tag-black">Embedded Systems</span>
+          <span class="tag tag-mid">CAD · Vision</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="alt" id="skills">
+  <div class="section-inner">
+    <div class="section-label">Expertise</div>
+    <div class="section-title">Skills</div>
+    <div class="divider"></div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>CAD & Design</h4>
+        <ul><li>SolidWorks (CSWA)</li><li>AutoCAD · Fusion 360</li><li>GD&T · Tech Drawings</li><li>Assembly Modeling</li></ul>
+      </div>
+      <div class="skill-group">
+        <h4>Robotics & Software</h4>
+        <ul><li>ROS2 (Jazzy)</li><li>Python · C++ · MATLAB</li><li>Linux · Git</li><li>Simulink</li></ul>
+      </div>
+      <div class="skill-group">
+        <h4>Sensing & Fusion</h4>
+        <ul><li>IMU · GPS · Camera</li><li>Extended Kalman Filter</li><li>Visual Odometry</li><li>Sensor Calibration</li></ul>
+      </div>
+      <div class="skill-group">
+        <h4>Embedded Systems</h4>
+        <ul><li>Arduino · ESP32/ESP8266</li><li>Teensy 4.1</li><li>Motor Control (PID)</li><li>IoT Systems</li></ul>
+      </div>
+      <div class="skill-group">
+        <h4>Manufacturing</h4>
+        <ul><li>CNC Machining</li><li>3D Printing (FDM)</li><li>Laser Cutting</li><li>Sheet Metal Forming</li></ul>
+      </div>
+      <div class="skill-group">
+        <h4>Analysis</h4>
+        <ul><li>Forward / Inverse Dynamics</li><li>Kinematic Analysis</li><li>State-Space Control</li><li>Lie Groups · SE(2)/SO(3)</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">Let's Connect</div>
+    <div class="section-title">Contact</div>
+    <div class="divider"></div>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="contact-label">Email</div>
+        <a href="mailto:jangid.mo@northeastern.edu">jangid.mo@northeastern.edu</a>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Phone</div>
+        <a href="tel:+18573516248">(857) 351-6248</a>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">LinkedIn</div>
+        <a href="https://linkedin.com/in/mohit-jangid-6a2389289" target="_blank">mohit-jangid</a>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">GitHub</div>
+        <a href="https://github.com/jangid-mo" target="_blank">jangid-mo</a>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Location</div>
+        <span>Boston, MA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 <span>Mohit Jangid</span> · MS Robotics Engineering · Northeastern University</footer>
+
+<script>
+  const slideshows = ['ss-sensenav','ss-sixbar','ss-arm','ss-ostrich','ss-filament','ss-ivbag','ss-robocon'];
+  const timers = {};
+
+  function initSlideshow(id) {
+    const ss = document.getElementById(id);
+    if (!ss) return;
+    const slides = ss.querySelectorAll('.slide');
+    const dotsEl = document.getElementById('dots-' + id);
+    if (!dotsEl) return;
+    slides.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.onclick = () => goToSlide(id, i);
+      dotsEl.appendChild(d);
+    });
+    startAuto(id);
+  }
+
+  function getIdx(id) {
+    const ss = document.getElementById(id);
+    const slides = ss.querySelectorAll('.slide');
+    for (let i = 0; i < slides.length; i++) if (slides[i].classList.contains('active')) return i;
+    return 0;
+  }
+
+  function goToSlide(id, idx) {
+    const ss = document.getElementById(id);
+    const slides = ss.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('#dots-' + id + ' .dot');
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    const n = (idx + slides.length) % slides.length;
+    slides[n].classList.add('active');
+    if (dots[n]) dots[n].classList.add('active');
+    clearInterval(timers[id]);
+    startAuto(id);
+  }
+
+  function changeSlide(id, dir) { goToSlide(id, getIdx(id) + dir); }
+
+  function startAuto(id) {
+    timers[id] = setInterval(() => goToSlide(id, getIdx(id) + 1), 3000);
+  }
+
+  slideshows.forEach(id => {
+    initSlideshow(id);
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('mouseenter', () => clearInterval(timers[id]));
+      el.addEventListener('mouseleave', () => startAuto(id));
+    }
+  });
+</script>
+</body>
+</html>
