@@ -198,6 +198,7 @@
     <span class="chip">MATLAB · Python · C++</span>
     <span class="chip">Embedded Systems</span>
     <span class="chip">Mechanism Design</span>
+    <span class="chip">MPC · Path Planning</span>
   </div>
   <div class="hero-btns">
     <a class="btn btn-primary" href="#projects">View Projects</a>
@@ -212,7 +213,7 @@
     <div class="section-title">About Me</div>
     <div class="divider"></div>
     <div class="about-box">
-      <p>I'm a <span>robotics engineer from India</span>, currently pursuing my MS at <span>Northeastern University in Boston</span>. My journey started at <span>ABU Robocon 2022</span>, where competing internationally sparked a deep passion for building real, functional machines. Since then I've designed industrial systems professionally, worked on research projects, and continue to grow across the <span>full stack of robotics</span> — from mechanical design to software to controls. I believe the best engineers don't just design on paper — they <span>build, test, and iterate</span>.</p>
+      <p>I'm a <span>robotics engineer from India</span>, currently pursuing my MS at <span>Northeastern University in Boston</span>. My journey started at <span>ABU Robocon 2022</span>, where competing internationally sparked a deep passion for building real, functional machines. Since then I've designed industrial systems professionally, worked on research projects, and continue to grow across the <span>full stack of robotics</span> from mechanical design to software to controls. I believe the best engineers don't just design on paper they <span>build, test, and iterate</span>.</p>
     </div>
   </div>
 </section>
@@ -237,9 +238,9 @@
       <!-- TRUCK-DRONE -->
       <div class="card">
         <div class="slideshow" id="ss-truckdrone">
-          <div class="slide active"><img src="map2/mpc_animation_astar.gif" alt="MPC A* Animation"/></div>
-          <div class="slide"><img src="map2/mpc_animation_rrt.gif" alt="MPC RRT Animation"/></div>
-          <div class="slide"><img src="map4/mpc_animation_std_rrt.gif" alt="MPC Std RRT Animation"/></div>
+          <div class="slide active"><img src="https://raw.githubusercontent.com/jangid-mo/truck-drone-delivery-mpc/main/map2/mpc_animation_astar.gif" alt="MPC A* Animation"/></div>
+          <div class="slide"><img src="https://raw.githubusercontent.com/jangid-mo/truck-drone-delivery-mpc/main/map2/mpc_animation_rrt.gif" alt="MPC RRT Animation"/></div>
+          <div class="slide"><img src="https://raw.githubusercontent.com/jangid-mo/truck-drone-delivery-mpc/main/map4/mpc_animation_std_rrt.gif" alt="MPC Std RRT Animation"/></div>
           <button class="slide-btn prev" onclick="changeSlide('ss-truckdrone',-1)">&#8249;</button>
           <button class="slide-btn next" onclick="changeSlide('ss-truckdrone',1)">&#8250;</button>
           <div class="slide-dots" id="dots-ss-truckdrone"></div>
@@ -279,7 +280,7 @@
         </div>
         <div class="card-body">
           <div class="card-category">Sensor Fusion · ROS2</div>
-          <h3>SenseNav — Multi-Sensor Localization</h3>
+          <h3>SenseNav: Multi-Sensor Localization</h3>
           <p>Integrated GPS, IMU (VectorNav VN-100), and camera in ROS2 Jazzy. Implemented Extended Kalman Filter with GPS–VO frame alignment via SVD. Reduced monocular VO drift from 45.8% → 3.1% using IMU-aided approach. Tested across indoor, outdoor, and transition scenarios (444s total data).</p>
           <div class="card-tags">
             <span class="tag tag-blue">ROS2 Jazzy</span>
@@ -311,8 +312,8 @@
         </div>
         <div class="card-body">
           <div class="card-category">Mechanism Design · Kinematics</div>
-          <h3>Six-Bar Linkage — Kinematic Analysis</h3>
-          <p>Designed two six-bar mechanisms in SolidWorks: a Stephenson III slider-crank (190mm stroke) and a Watt's platform deployment linkage (0–120° range). Complete MATLAB kinematic analysis — DOF, position, velocity, workspace, and singularity identification.</p>
+          <h3>Six-Bar Linkage: Kinematic Analysis</h3>
+          <p>Designed two six-bar mechanisms in SolidWorks: a Stephenson III slider-crank (190mm stroke) and a Watt's platform deployment linkage (0–120° range). Complete MATLAB kinematic analysis DOF, position, velocity, workspace, and singularity identification.</p>
           <div class="card-tags">
             <span class="tag tag-blue">SolidWorks</span>
             <span class="tag tag-black">MATLAB</span>
@@ -340,8 +341,8 @@
         </div>
         <div class="card-body">
           <div class="card-category">Dynamics Simulation · MATLAB</div>
-          <h3>3R Planar Arm — Forward Dynamics</h3>
-          <p>Simulated a 3-link planar arm falling under gravity. Derived full dynamics — mass matrix from Jacobians, gravity torques via virtual work, Coriolis terms via Christoffel symbols. RK4 integration over 30,000 timesteps achieved 0.0002% energy conservation error.</p>
+          <h3>3R Planar Arm: Forward Dynamics</h3>
+          <p>Simulated a 3-link planar arm falling under gravity. Derived full dynamics mass matrix from Jacobians, gravity torques via virtual work, Coriolis terms via Christoffel symbols. RK4 integration over 30,000 timesteps achieved 0.0002% energy conservation error.</p>
           <div class="card-tags">
             <span class="tag tag-blue">MATLAB</span>
             <span class="tag tag-black">Forward Dynamics</span>
@@ -369,7 +370,7 @@
         </div>
         <div class="card-body">
           <div class="card-category">Legged Robotics · Mechanical Design</div>
-          <h3>The Ostrich — Bipedal Robot</h3>
+          <h3>The Ostrich: Bipedal Robot</h3>
           <p>Designed a 10-DOF bipedal robot leg mechanism using the SLIP model framework. Full SolidWorks design, inverse kinematics solver (12 equations), 10 stepper motors with TB6600 drivers and Teensy 4.1. Physical prototype via hybrid CNC and 3D printing. Government funded through SSIP.</p>
           <div class="card-tags">
             <span class="tag tag-blue">SolidWorks</span>
@@ -446,7 +447,7 @@
   <div class="section-inner">
     <div class="section-label">Competition</div>
     <div class="section-title">ABU Robocon 2022</div>
-    <p class="section-sub">Where my robotics journey began — Asia's premier international robotics competition.</p>
+    <p class="section-sub">Where my robotics journey began Asia's premier international robotics competition.</p>
     <div class="divider"></div>
     <div class="comp-card">
       <div class="comp-slideshow" id="ss-robocon">
@@ -490,7 +491,7 @@
           </div>
           <div class="exp-date">Sep 2024 – Jul 2025 · India</div>
         </div>
-        <p class="exp-desc">Designed and delivered 15+ custom industrial steam jet ejector vacuum systems. Managed full project cycle — CAD modeling, technical drawings, and manufacturing coordination. Implemented standardized templates and automated BOM generation, reducing design cycle time by 20% and achieving 95% customer satisfaction.</p>
+        <p class="exp-desc">Designed and delivered 15+ custom industrial steam jet ejector vacuum systems. Managed full project cycle CAD modeling, technical drawings, and manufacturing coordination. Implemented standardized templates and automated BOM generation, reducing design cycle time by 20% and achieving 95% customer satisfaction.</p>
         <div class="exp-tags">
           <span class="tag tag-blue">SolidWorks · AutoCAD</span>
           <span class="tag tag-black">Industrial CAD</span>
