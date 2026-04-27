@@ -234,6 +234,36 @@
     <div class="divider"></div>
     <div class="projects-grid">
 
+      <!-- TRUCK-DRONE -->
+      <div class="card">
+        <div class="slideshow" id="ss-truckdrone">
+          <div class="slide active"><img src="map2/mpc_animation_astar.gif" alt="MPC A* Animation"/></div>
+          <div class="slide"><img src="map2/mpc_animation_rrt.gif" alt="MPC RRT Animation"/></div>
+          <div class="slide"><img src="map4/mpc_animation_std_rrt.gif" alt="MPC Std RRT Animation"/></div>
+          <button class="slide-btn prev" onclick="changeSlide('ss-truckdrone',-1)">&#8249;</button>
+          <button class="slide-btn next" onclick="changeSlide('ss-truckdrone',1)">&#8250;</button>
+          <div class="slide-dots" id="dots-ss-truckdrone"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-category">Path Planning · MPC · Cooperative Robotics</div>
+          <h3>Truck-Drone Cooperative Delivery</h3>
+          <p>Designed a cooperative delivery pipeline where a drone launches from a moving truck, delivers a package to an off-road point, and returns to land on the truck. Implemented A*, wind-biased RRT with feedforward wind compensation, and optimal launch timing search. MPC-based trajectory tracking under stochastic Ornstein-Uhlenbeck wind disturbances, validated across 5 map configurations.</p>
+          <div class="card-tags">
+            <span class="tag tag-blue">Python</span>
+            <span class="tag tag-black">A* · RRT</span>
+            <span class="tag tag-mid">MPC · QP</span>
+            <span class="tag tag-blue">Path Planning</span>
+            <span class="tag tag-mid">Wind Disturbance</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <span class="card-badge badge-course">Northeastern · EECE 5550</span>
+          <div class="card-links">
+            <a class="card-link" href="https://github.com/jangid-mo/truck-drone-delivery-mpc" target="_blank">GitHub</a>
+          </div>
+        </div>
+      </div>
+
       <!-- SENSENAV -->
       <div class="card">
         <div class="slideshow" id="ss-sensenav">
@@ -589,7 +619,7 @@
 <footer>© 2026 <span>Mohit Jangid</span> · MS Robotics Engineering · Northeastern University</footer>
 
 <script>
-  const slideshows = ['ss-sensenav','ss-sixbar','ss-arm','ss-ostrich','ss-filament','ss-ivbag','ss-robocon'];
+  const slideshows = ['ss-truckdrone','ss-sensenav','ss-sixbar','ss-arm','ss-ostrich','ss-filament','ss-ivbag','ss-robocon'];
   const timers = {};
 
   function initSlideshow(id) {
